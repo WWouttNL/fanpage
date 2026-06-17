@@ -29,7 +29,7 @@
             justify-content: flex-end;
         }
 
-        /* --- DE HOOFDTITEL (NIEUW) --- */
+        /* --- DE HOOFDTITEL --- */
         .fanpage-titel {
             position: absolute;
             top: 25px;
@@ -38,12 +38,14 @@
             color: #ffffff;
             text-transform: uppercase;
             letter-spacing: 3px;
-            /* Dikke text-shadow voor ultieme leesbaarheid tegen de avondlucht */
             text-shadow: 0 0 30px rgba(207, 135, 41, 0.6), 0 6px 15px rgba(0, 0, 0, 0.8);
             z-index: 20;
             margin: 0;
             text-align: center;
             user-select: none;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 0 20px;
         }
 
         /* --- DE SCHOORSTEEN STRUCTUUR --- */
@@ -63,6 +65,7 @@
             box-shadow: inset 0 -5px 10px rgba(0,0,0,0.5), 0 5px 10px rgba(0,0,0,0.3);
             margin-bottom: -5px;
             z-index: 2;
+            transition: all 0.3s;
         }
 
         .schoorsteen-schacht {
@@ -74,6 +77,7 @@
             clip-path: polygon(18% 0%, 82% 0%, 100% 100%, 0% 100%);
             position: relative;
             z-index: 1;
+            transition: all 0.3s;
         }
 
         .schoorsteen-voet {
@@ -83,6 +87,7 @@
             border-radius: 4px 4px 0 0;
             margin-top: -2px;
             z-index: 2;
+            transition: all 0.3s;
         }
 
 
@@ -98,7 +103,7 @@
             font-weight: 800;
             cursor: pointer;
             box-shadow: 0 20px 40px rgba(0,0,0,0.3), inset -20px -20px 30px rgba(0,0,0,0.15);
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s, box-shadow 0.3s;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s, box-shadow 0.3s, width 0.3s, height 0.3s, bottom 0.3s, left 0.3s;
             user-select: none;
             text-align: center;
             box-sizing: border-box;
@@ -117,7 +122,7 @@
             width: 290px;
             height: 200px;
             bottom: 350px; 
-            left: calc(50% - 175px);
+            left: calc(50% - 145px);
             font-size: 1.8rem;
             animation: zweefLinks 6s ease-in-out infinite alternate;
             z-index: 5;
@@ -129,7 +134,7 @@
             width: 420px;
             height: 290px;
             bottom: 500px;
-            left: calc(50% - 140px);
+            left: calc(50% - 210px);
             font-size: 2.4rem;
             animation: zweefRechts 7s ease-in-out infinite alternate;
             z-index: 4;
@@ -141,7 +146,7 @@
             width: 560px;
             height: 380px;
             bottom: 680px;
-            left: calc(50% - 340px);
+            left: calc(50% - 280px);
             font-size: 2.8rem;
             animation: zweefLinksBonus 8s ease-in-out infinite alternate;
             z-index: 3;
@@ -179,11 +184,12 @@
             position: fixed;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            width: 480px;
+            width: 90%;
+            max-width: 480px;
             background: rgba(255, 255, 255, 0.98);
             border-radius: 16px;
             box-shadow: 0 25px 50px rgba(0,0,0,0.4);
-            padding: 30px;
+            padding: 25px;
             box-sizing: border-box;
             z-index: 100;
             color: #222;
@@ -258,7 +264,7 @@
         .rang-row.silver { background: #e0e0e0; color: #222; }
 
         /* --- BRON STYLING VOOR RECORSTRICTIES --- */
-        .quiz-vraag-container { font-size: 1.3rem; font-weight: bold; text-align: center; margin-bottom: 20px; min-height: 60px; display: flex; align-items: center; justify-content: center; }
+        .quiz-vraag-container { font-size: 1.2rem; font-weight: bold; text-align: center; margin-bottom: 20px; min-height: 60px; display: flex; align-items: center; justify-content: center; }
         .quiz-opties-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
         .btn-optie { background: #f0f4f8; border: 2px solid #111e47; padding: 14px; font-size: 1.1rem; font-weight: bold; border-radius: 8px; cursor: pointer; transition: all 0.2s; color: #111e47; }
         .btn-optie:hover { background: #111e47; color: white; transform: translateY(-2px); }
@@ -274,17 +280,87 @@
         .btn-bereken:hover { background: #a12b28; }
         .btn-sluit { background: #555; color: white; border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; }
         .resultaat-box { font-size: 1.5rem; font-weight: 900; color: #ff4500; background: #f0f0f0; padding: 10px 20px; border-radius: 8px; min-width: 80px; text-align: center; border: 2px dashed #7a1f1d; }
+
+        /* ---------------------------------------------------- */
+        /* --- MEDIA QUERY VOOR TELEFOONS / KLEINE SCHERMEN --- */
+        /* ---------------------------------------------------- */
+        @media (max-width: 650px) {
+            .fanpage-titel {
+                font-size: 2.2rem;
+                top: 15px;
+            }
+
+            /* Schaal de schoorsteen een stukje naar beneden */
+            .schoorsteen-kop { width: 170px; height: 25px; }
+            .schoorsteen-schacht { width: 210px; height: 180px; }
+            .schoorsteen-voet { width: 240px; height: 35px; }
+
+            /* Schaal de wolken drastisch naar beneden zodat ze op het scherm passen */
+            .wolk-1 {
+                width: 150px; height: 100px;
+                bottom: 210px; left: calc(50% - 75px);
+                font-size: 1rem;
+                padding: 10px;
+            }
+            .wolk-2 {
+                width: 220px; height: 150px;
+                bottom: 290px; left: calc(50% - 110px);
+                font-size: 1.3rem;
+                padding: 15px;
+            }
+            .wolk-3 {
+                width: 290px; height: 190px;
+                bottom: 410px; left: calc(50% - 145px);
+                font-size: 1.5rem;
+                padding: 20px;
+            }
+
+            /* Maak de zweef-animaties iets subtieler voor kleine schermen */
+            @keyframes zweefLinks {
+                0% { transform: translate(0, 0); }
+                100% { transform: translate(-15px, -5px); }
+            }
+            @keyframes zweefRechts {
+                0% { transform: translate(0, 0); }
+                100% { transform: translate(15px, -10px); }
+            }
+            @keyframes zweefLinksBonus {
+                0% { transform: translate(0, 0); }
+                100% { transform: translate(-20px, -15px); }
+            }
+
+            /* Zet de quiz opties onder elkaar in plaats van naast elkaar (beter klikbaar) */
+            .quiz-opties-grid {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            .btn-optie {
+                padding: 10px;
+                font-size: 1rem;
+            }
+            
+            .gui-venster {
+                padding: 15px;
+            }
+            .quiz-vraag-container {
+                font-size: 1.1rem;
+                margin-bottom: 15px;
+            }
+        }
     </style>
 </head>
 <body>
 
     <div class="scenerij">
+        <!-- Grote fanpagina header bovenaan het scherm -->
         <h1 class="fanpage-titel">Thijmen Fanpage</h1>
 
+        <!-- De drie gigantische, interactieve rookwolken -->
         <div class="rookwolk wolk-3" onclick="openBerekenaar()">Cijferberekenaar</div>
         <div class="rookwolk wolk-2" onclick="openQuiz()">Thijmen-quiz</div>
         <div class="rookwolk wolk-1" onclick="openGame()">1v1 Thijmen</div>
         
+        <!-- De strakke, taps toelopende schoorsteen -->
         <div class="schoorsteen-complex">
             <div class="schoorsteen-kop"></div>
             <div class="schoorsteen-schacht"></div>
@@ -292,8 +368,10 @@
         </div>
     </div>
 
+    <!-- GEDEELDE OVERLAY -->
     <div class="gui-overlay" id="overlay" onclick="sluitAlleGuis()"></div>
 
+    <!-- --- 1. DE CALCULATOR GUI --- -->
     <div class="gui-venster" id="berekenaarVenster">
         <h2 class="gui-header header-berekenaar">Cijferberekenaar</h2>
         <div class="gui-groep">
@@ -327,6 +405,7 @@
         </div>
     </div>
 
+    <!-- --- 2. DE THIJMEN-QUIZ GUI --- -->
     <div class="gui-venster" id="quizVenster">
         <h2 class="gui-header header-quiz">Thijmen-quiz</h2>
         <div id="quizInhoud">
@@ -343,6 +422,7 @@
         </div>
     </div>
 
+    <!-- --- 3. DE 1v1 THIJMEN GAME GUI --- -->
     <div class="gui-venster" id="gameVenster">
         <h2 class="gui-header header-game">1v1 Thijmen</h2>
         <div id="gameInhoud">
@@ -354,7 +434,7 @@
 
         <div id="gameResultaatScherm" style="display: none;">
             <h3 style="text-align: center; margin-bottom: 5px;">Eindstand 1v1</h3>
-            <p style="text-align: center; color:#666; margin-top:0;">Thijmen was helaas weer onverslaanbaar...</p>
+            <p style="text-align: center; color:#666; margin-top:0; font-size: 0.9rem;">Thijmen was helaas weer onverslaanbaar...</p>
             
             <div class="ranglijst">
                 <div class="rang-row gold">
