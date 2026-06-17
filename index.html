@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thijmen Fanpage</title>
+    <style>
+        /* Basisinstellingen voor de pagina */
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: linear-gradient(to bottom, #111e47, #7a1f1d, #cf8729); /* Diepe, sfeervolle avondgloed */
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+        }
+
+        /* De scenerij vult het hele scherm */
+        .scenerij {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        /* --- DE HOOFDTITEL (NIEUW) --- */
+        .fanpage-titel {
+            position: absolute;
+            top: 25px;
+            font-size: 4rem;
+            font-weight: 900;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            /* Dikke text-shadow voor ultieme leesbaarheid tegen de avondlucht */
+            text-shadow: 0 0 30px rgba(207, 135, 41, 0.6), 0 6px 15px rgba(0, 0, 0, 0.8);
+            z-index: 20;
+            margin: 0;
+            text-align: center;
+            user-select: none;
+        }
+
+        /* --- DE SCHOORSTEEN STRUCTUUR --- */
+        .schoorsteen-complex {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 10;
+            filter: drop-shadow(0 15px 30px rgba(0,0,0,0.6));
+        }
+
+        .schoorsteen-kop {
+            width: 250px;
+            height: 35px;
+            background: linear-gradient(90deg, #222 0%, #444 50%, #222 100%);
+            border-radius: 6px;
+            box-shadow: inset 0 -5px 10px rgba(0,0,0,0.5), 0 5px 10px rgba(0,0,0,0.3);
+            margin-bottom: -5px;
+            z-index: 2;
+        }
+
+        .schoorsteen-schacht {
+            width: 320px;
+            height: 290px;
+            background: 
+                repeating-linear-gradient(transparent, transparent 16px, rgba(0,0,0,0.25) 16px, rgba(0,0,0,0.25) 19px),
+                linear-gradient(90deg, #301716 0%, #5c2927 25%, #823b38 50%, #5c2927 75%, #301716 100%);
+            clip-path: polygon(18% 0%, 82% 0%, 100% 100%, 0% 100%);
+            position: relative;
+            z-index: 1;
+        }
+
+        .schoorsteen-voet {
+            width: 360px;
+            height: 45px;
+            background: linear-gradient(90deg, #1c1c1c 0%, #3a3a3a 50%, #1c1c1c 100%);
+            border-radius: 4px 4px 0 0;
+            margin-top: -2px;
+            z-index: 2;
+        }
+
+
+        /* --- DE REUSACHTIGE ROOKWOLKEN --- */
+        .rookwolk {
+            position: absolute;
+            background: rgba(245, 245, 245, 0.92);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #111;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3), inset -20px -20px 30px rgba(0,0,0,0.15);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s, box-shadow 0.3s;
+            user-select: none;
+            text-align: center;
+            box-sizing: border-box;
+            padding: 30px;
+        }
+
+        .rookwolk:hover {
+            transform: scale(1.12) !important;
+            background: #ffffff;
+            color: #ff4500;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4), inset -10px -10px 20px rgba(0,0,0,0.1);
+        }
+
+        /* Wolk 1: 1v1 Thijmen */
+        .wolk-1 {
+            width: 290px;
+            height: 200px;
+            bottom: 350px; 
+            left: calc(50% - 175px);
+            font-size: 1.8rem;
+            animation: zweefLinks 6s ease-in-out infinite alternate;
+            z-index: 5;
+            color: #cf8729;
+        }
+
+        /* Wolk 2: Thijmen-quiz */
+        .wolk-2 {
+            width: 420px;
+            height: 290px;
+            bottom: 500px;
+            left: calc(50% - 140px);
+            font-size: 2.4rem;
+            animation: zweefRechts 7s ease-in-out infinite alternate;
+            z-index: 4;
+            color: #111e47;
+        }
+
+        /* Wolk 3: Cijferberekenaar */
+        .wolk-3 {
+            width: 560px;
+            height: 380px;
+            bottom: 680px;
+            left: calc(50% - 340px);
+            font-size: 2.8rem;
+            animation: zweefLinksBonus 8s ease-in-out infinite alternate;
+            z-index: 3;
+            color: #7a1f1d;
+        }
+
+        /* Zweef-animaties */
+        @keyframes zweefLinks {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(-35px, -15px) rotate(-1.5deg); }
+        }
+        @keyframes zweefRechts {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(45px, -25px) rotate(2deg); }
+        }
+        @keyframes zweefLinksBonus {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(-40px, -30px) rotate(-1deg); }
+        }
+
+
+        /* --- ALGEMENE GUI / MODAL STYLING --- */
+        .gui-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 99;
+        }
+
+        .gui-venster {
+            display: none;
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 480px;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 16px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+            padding: 30px;
+            box-sizing: border-box;
+            z-index: 100;
+            color: #222;
+        }
+
+        .gui-header {
+            margin-top: 0;
+            text-align: center;
+            border-bottom: 3px solid #cf8729;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+        }
+
+        .header-berekenaar { color: #7a1f1d; }
+        .header-quiz { color: #111e47; border-bottom-color: #111e47; }
+        .header-game { color: #cf8729; border-bottom-color: #cf8729; }
+
+        /* --- 1v1 GAME STYLING --- */
+        .game-score-balk {
+            background: #f0f0f0;
+            border: 2px solid #cf8729;
+            border-radius: 8px;
+            padding: 8px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #cf8729;
+            margin-bottom: 15px;
+        }
+
+        .game-opties-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .btn-game-optie {
+            background: #fff;
+            border: 2px solid #ccc;
+            padding: 12px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.2s;
+        }
+
+        .btn-game-optie:hover {
+            border-color: #cf8729;
+            background: #fffdf5;
+            transform: translateX(3px);
+        }
+
+        .ranglijst {
+            margin: 20px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .rang-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 20px;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        .rang-row.gold { background: #ffd700; color: #000; }
+        .rang-row.silver { background: #e0e0e0; color: #222; }
+
+        /* --- BRON STYLING VOOR RECORSTRICTIES --- */
+        .quiz-vraag-container { font-size: 1.3rem; font-weight: bold; text-align: center; margin-bottom: 20px; min-height: 60px; display: flex; align-items: center; justify-content: center; }
+        .quiz-opties-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+        .btn-optie { background: #f0f4f8; border: 2px solid #111e47; padding: 14px; font-size: 1.1rem; font-weight: bold; border-radius: 8px; cursor: pointer; transition: all 0.2s; color: #111e47; }
+        .btn-optie:hover { background: #111e47; color: white; transform: translateY(-2px); }
+        .quiz-status { text-align: center; font-size: 0.9rem; color: #666; margin-top: 15px; }
+        .quiz-resultaat-scherm { text-align: center; padding: 20px 0; }
+        .quiz-percentage { font-size: 3.5rem; font-weight: 900; color: #ff4500; margin: 15px 0; }
+        .gui-groep { margin-bottom: 20px; }
+        .gui-groep label { display: block; font-weight: bold; margin-bottom: 8px; font-size: 1.1rem; }
+        .gui-groep select { width: 100%; padding: 12px; border: 2px solid #ccc; border-radius: 8px; font-size: 1rem; background: #fff; outline: none; }
+        .gui-groep select:focus { border-color: #7a1f1d; }
+        .gui-acties { display: flex; align-items: center; justify-content: space-between; gap: 15px; margin-top: 25px; }
+        .btn-bereken { background: #7a1f1d; color: white; border: none; padding: 12px 25px; font-size: 1.1rem; font-weight: bold; border-radius: 8px; cursor: pointer; }
+        .btn-bereken:hover { background: #a12b28; }
+        .btn-sluit { background: #555; color: white; border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; }
+        .resultaat-box { font-size: 1.5rem; font-weight: 900; color: #ff4500; background: #f0f0f0; padding: 10px 20px; border-radius: 8px; min-width: 80px; text-align: center; border: 2px dashed #7a1f1d; }
+    </style>
+</head>
+<body>
+
+    <div class="scenerij">
+        <h1 class="fanpage-titel">Thijmen Fanpage</h1>
+
+        <div class="rookwolk wolk-3" onclick="openBerekenaar()">Cijferberekenaar</div>
+        <div class="rookwolk wolk-2" onclick="openQuiz()">Thijmen-quiz</div>
+        <div class="rookwolk wolk-1" onclick="openGame()">1v1 Thijmen</div>
+        
+        <div class="schoorsteen-complex">
+            <div class="schoorsteen-kop"></div>
+            <div class="schoorsteen-schacht"></div>
+            <div class="schoorsteen-voet"></div>
+        </div>
+    </div>
+
+    <div class="gui-overlay" id="overlay" onclick="sluitAlleGuis()"></div>
+
+    <div class="gui-venster" id="berekenaarVenster">
+        <h2 class="gui-header header-berekenaar">Cijferberekenaar</h2>
+        <div class="gui-groep">
+            <label for="vakSelect">Kies een vak:</label>
+            <select id="vakSelect">
+                <option value="Nederlands">Nederlands</option>
+                <option value="Wiskunde">Wiskunde</option>
+                <option value="Frans">Frans</option>
+                <option value="Duits">Duits</option>
+                <option value="Biologie">Biologie</option>
+                <option value="Aardrijkskunde">Aardrijkskunde</option>
+                <option value="Natuurkunde">Natuurkunde</option>
+                <option value="Geschiedenis">Geschiedenis</option>
+                <option value="Grieks">Grieks</option>
+                <option value="Latijn">Latijn</option>
+            </select>
+        </div>
+        <div class="gui-groep">
+            <label for="niveauSelect">Moeilijkheidsniveau:</label>
+            <select id="niveauSelect">
+                <option value="Bruggerniveau">Bruggerniveau</option>
+                <option value="HAVO">HAVO</option>
+                <option value="VWO">VWO</option>
+                <option value="Koen Koutstaal">Koen Koutstaal</option>
+            </select>
+        </div>
+        <div class="gui-acties">
+            <button class="btn-bereken" onclick="berekenCijfer()">Bereken</button>
+            <div class="resultaat-box" id="cijferResultaat">-</div>
+            <button class="btn-sluit" onclick="sluitAlleGuis()">Sluit</button>
+        </div>
+    </div>
+
+    <div class="gui-venster" id="quizVenster">
+        <h2 class="gui-header header-quiz">Thijmen-quiz</h2>
+        <div id="quizInhoud">
+            <div class="quiz-vraag-container" id="quizVraagText">Laat de quiz beginnen...</div>
+            <div class="quiz-opties-grid" id="quizOptiesSectie"></div>
+            <div class="quiz-status" id="quizStatusText">Vraag 1 van 5</div>
+        </div>
+        <div id="quizResultaatScherm" class="quiz-resultaat-scherm" style="display: none;">
+            <h3>Quiz Afgerond!</h3>
+            <p>Jouw score:</p>
+            <div class="quiz-percentage" id="quizPercentageText">0%</div>
+            <p id="quizFeedbackText">Goed gedaan!</p>
+            <button class="btn-sluit" style="background:#111e47; margin-top:15px;" onclick="sluitAlleGuis()">Sluit Quiz</button>
+        </div>
+    </div>
+
+    <div class="gui-venster" id="gameVenster">
+        <h2 class="gui-header header-game">1v1 Thijmen</h2>
+        <div id="gameInhoud">
+            <div class="game-score-balk">Punten: <span id="gameScoreText">0</span></div>
+            <div class="quiz-vraag-container" id="gameVraagText">Laden...</div>
+            <div class="game-opties-stack" id="gameOptiesSectie"></div>
+            <div class="quiz-status" id="gameStatusText">Vraag 1 van 10</div>
+        </div>
+
+        <div id="gameResultaatScherm" style="display: none;">
+            <h3 style="text-align: center; margin-bottom: 5px;">Eindstand 1v1</h3>
+            <p style="text-align: center; color:#666; margin-top:0;">Thijmen was helaas weer onverslaanbaar...</p>
+            
+            <div class="ranglijst">
+                <div class="rang-row gold">
+                    <span>1. Thijmen</span>
+                    <span id="scoreThijmen">0</span>
+                </div>
+                <div class="rang-row silver">
+                    <span>2. Jij</span>
+                    <span id="scoreJij">0</span>
+                </div>
+            </div>
+
+            <div style="text-align: center;">
+                <button class="btn-sluit" style="background:#cf8729; margin-top:10px;" onclick="sluitAlleGuis()">Sluit Arena</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        /* --- MENU CONTROLS --- */
+        function sluitAlleGuis() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('berekenaarVenster').style.display = 'none';
+            document.getElementById('quizVenster').style.display = 'none';
+            document.getElementById('gameVenster').style.display = 'none';
+            document.getElementById('cijferResultaat').innerText = '-';
+        }
+
+        function openBerekenaar() { sluitAlleGuis(); document.getElementById('overlay').style.display = 'block'; document.getElementById('berekenaarVenster').style.display = 'block'; }
+        function openQuiz() { sluitAlleGuis(); startThijmenQuiz(); }
+        function openGame() { sluitAlleGuis(); start1v1Game(); }
+
+        /* --- CIJFERBEREKENAAR LOGICA --- */
+        const cijferData = {
+            'Bruggerniveau': { 'Wiskunde': '10+', 'Natuurkunde': '10+', 'Grieks': '10+', 'Latijn': '10+', 'Frans': '10+', 'Duits': '10+', 'Biologie': '10+', 'Geschiedenis': '10+', 'Nederlands': '10+', 'Aardrijkskunde': '10+' },
+            'HAVO': { 'Wiskunde': '10', 'Natuurkunde': '10', 'Grieks': '10', 'Latijn': '10', 'Frans': '10', 'Duits': '10', 'Biologie': '10', 'Geschiedenis': '10', 'Nederlands': '10', 'Aardrijkskunde': '6' },
+            'VWO': { 'Wiskunde': '10+', 'Natuurkunde': '10', 'Grieks': '9.6', 'Latijn': '9.3', 'Frans': '9.0', 'Duits': '8.7', 'Biologie': '8.5', 'Geschiedenis': '8.3', 'Nederlands': '8.1', 'Aardrijkskunde': '8' },
+            'Koen Koutstaal': { 'Wiskunde': '9', 'Natuurkunde': '8.7', 'Grieks': '8.5', 'Latijn': '8.2', 'Frans': '8.0', 'Duits': '7.7', 'Biologie': '7.5', 'Geschiedenis': '7.3', 'Nederlands': '7.1', 'Aardrijkskunde': '7' }
+        };
+        function berekenCijfer() {
+            const gekozenVak = document.getElementById('vakSelect').value;
+            const gekozenNiveau = document.getElementById('niveauSelect').value;
+            document.getElementById('cijferResultaat').innerText = cijferData[gekozenNiveau][gekozenVak];
+        }
+
+        /* --- THIJMEN-QUIZ LOGICA --- */
+        const quizVragen = [
+            { v: "Wie is de meest skibidi?", a: "Thijmen" }, { v: "Wie is de meest sigma?", a: "Thijmen" },
+            { v: "Wie is de meest tuff?", a: "Thijmen" }, { v: "Wie is de beste in mario kart wii?", a: "Thijmen" },
+            { v: "Wie is de beste in Thijmen zijn:", a: "Thijmen" }
+        ];
+        const vasteOpties = ["Wout", "Pearse", "Sam", "Laurens", "Thijmen", "Otis"];
+        let huidigeVraagIndex = 0; let aantalGoed = 0;
+
+        function startThijmenQuiz() {
+            huidigeVraagIndex = 0; aantalGoed = 0;
+            document.getElementById('quizInhoud').style.display = 'block';
+            document.getElementById('quizResultaatScherm').style.display = 'none';
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('quizVenster').style.display = 'block';
+            laadQuizVraag();
+        }
+        function hussel(array) {
+            let k = [...array]; for (let i = k.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [k[i], k[j]] = [k[j], k[i]]; } return k;
+        }
+        function laadQuizVraag() {
+            const v = quizVragen[huidigeVraagIndex];
+            document.getElementById('quizVraagText').innerText = v.v;
+            document.getElementById('quizStatusText').innerText = `Vraag ${huidigeVraagIndex + 1} van 5`;
+            const gehusselede = hussel(vasteOpties);
+            const sec = document.getElementById('quizOptiesSectie'); sec.innerHTML = '';
+            gehusselede.forEach(o => {
+                const btn = document.createElement('button'); btn.className = 'btn-optie'; btn.innerText = o;
+                btn.onclick = function() { if(o===v.a) aantalGoed++; huidigeVraagIndex++; if(huidigeVraagIndex<5) laadQuizVraag(); else toonQuizResultaat(); };
+                sec.appendChild(btn);
+            });
+        }
+        function toonQuizResultaat() {
+            document.getElementById('quizInhoud').style.display = 'none';
+            document.getElementById('quizResultaatScherm').style.display = 'block';
+            const p = (aantalGoed / 5) * 100; document.getElementById('quizPercentageText').innerText = p + "%";
+            document.getElementById('quizFeedbackText').innerText = p===100 ? "Absolute W! Jij snapt het." : "Kan beter, Thijmen stelt teleur.";
+        }
+
+        /* --- 1v1 THIJMEN LOGICA --- */
+        const gameVragen = [
+            { v: "Wat doet Thijmen als hij verliest in Mario Kart Wii?", o: ["Huilen", "Controller slopen", "Onmogelijk, hij verliest nooit", "Ragequitten"], a: "Onmogelijk, hij verliest nooit" },
+            { v: "Welke brandstof gebruikt de legendarische schoorsteen van Thijmen?", o: ["Eikenhout", "Pure onvervalste aura", "Steenkool", "Aardgas"], a: "Pure onvervalste aura" },
+            { v: "Hoeveel uur per dag zit Thijmen in de gym voor zijn sigma-status?", o: ["1 uur", "25 uur per dag", "0 uur (hij is zo geboren)", "8 uur"], a: "0 uur (hij is zo geboren)" },
+            { v: "Wat is Thijmens favoriete tactiek in een intense 1v1?", o: ["Tactical crouching", "Wegrennen en bidden", "Intimidatie door pure stilte", "Hulp vragen aan Wout"], a: "Intimidatie door pure stilte" },
+            { v: "Als Thijmen een wiskundecijfer krijgt op Koen Koutstaal niveau, wat is dat dan?", o: ["Een magere 1", "Een stabiele 5.5", "Een 9 (uiteraard)", "Een 10++"], a: "Een 9 (uiteraard)" },
+            { v: "Wat gebeurt er als je Thijmen te lang recht in de ogen aankijkt?", o: ["Je krijgt direct -500 punten", "Je verandert in een skibidi toilet", "Je verliest op slag al je aura", "Hij knipoogt vriendelijk terug"], a: "Je verliest op slag al je aura" },
+            { v: "Welke legendarische kart/bike kiest Thijmen altijd op de Wii?", o: ["Flame Runner (Bowser Bike)", "Mach Bike", "Cheep Charger", "Blue Falcon"], a: "Flame Runner (Bowser Bike)" },
+            { v: "Wat eet Thijmen als ontbijt om zo ongelooflijk tuff te blijven?", o: ["Cornflakes met koud water", "Bakstenen uit de schoorsteen", "Pure motivatie en de grindset", "Een wit broodje met hagelslag"], a: "Pure motivatie en de grindset" },
+            { v: "Waarom staat Thijmen ALTIJD boven jou in de ranglijst?", o: ["De code is keihard rigged", "Hij heeft een betere gamingstoel", "Hij bezit simpelweg te veel skibidi energie", "Omdat hij Thijmen is"], a: "Omdat hij Thijmen is" },
+            { v: "Wat is Thijmens ultieme eindbaas-transformatie?", o: ["GigaChad Thijmen", "Sneeuwman Thijmen", "Schoorsteen Thijmen", "Meester Koutstaal Thijmen"], a: "GigaChad Thijmen" }
+        ];
+
+        let gameVraagIndex = 0; let gamePunten = 0;
+
+        function start1v1Game() {
+            gameVraagIndex = 0; gamePunten = 0;
+            document.getElementById('gameScoreText').innerText = "0";
+            document.getElementById('gameInhoud').style.display = 'block';
+            document.getElementById('gameResultaatScherm').style.display = 'none';
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('gameVenster').style.display = 'block';
+            laadGameVraag();
+        }
+
+        function laadGameVraag() {
+            const data = gameVragen[gameVraagIndex];
+            document.getElementById('gameVraagText').innerText = data.v;
+            document.getElementById('gameStatusText').innerText = `Vraag ${gameVraagIndex + 1} van 10`;
+            const sec = document.getElementById('gameOptiesSectie'); sec.innerHTML = '';
+            data.o.forEach(optie => {
+                const btn = document.createElement('button'); btn.className = 'btn-game-optie'; btn.innerText = optie;
+                btn.onclick = function() { if(optie === data.a) { gamePunten += 500; document.getElementById('gameScoreText').innerText = gamePunten; } gameVraagIndex++; if(gameVraagIndex < 10) laadGameVraag(); else toonGameEindstand(); };
+                sec.appendChild(btn);
+            });
+        }
+
+        function toonGameEindstand() {
+            document.getElementById('gameInhoud').style.display = 'none';
+            document.getElementById('gameResultaatScherm').style.display = 'block';
+            const stappen = [500, 1000, 1500, 2000];
+            const willekeurigVerschil = stappen[Math.floor(Math.random() * stappen.length)];
+            const thijmenPunten = gamePunten + willekeurigVerschil;
+            document.getElementById('scoreJij').innerText = gamePunten + " ptn";
+            document.getElementById('scoreThijmen').innerText = thijmenPunten + " ptn";
+        }
+    </script>
+</body>
+</html>
